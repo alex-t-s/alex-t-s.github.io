@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alex Tour-Sarkissian — GIS Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #1a1410;
+      --bg2:       #221c16;
+      --accent:    #c9913d;
+      --accent2:   #e8c27a;
+      --text:      #f0ebe3;
+      --muted:     #a09080;
+      --card-bg:   #261f18;
+      --border:    rgba(201,145,61,0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 2.5rem;
+      background: rgba(26,20,16,0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.03em;
+      color: var(--accent);
+    }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--accent); }
+    nav .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-resume {
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--accent);
+      border-radius: 3px;
+      color: var(--accent) !important;
+      font-size: 0.78rem !important;
+      letter-spacing: 0.08em;
+      transition: background 0.2s, color 0.2s !important;
+    }
+    .nav-resume:hover {
+      background: var(--accent);
+      color: var(--bg) !important;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 2.5rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* subtle grid lines background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,145,61,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,145,61,0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      gap: 3.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .headshot-wrap {
+      flex-shrink: 0;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 0 6px rgba(201,145,61,0.12);
+    }
+    .headshot-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: contrast(1.05) brightness(1.02);
+    }
+    /* placeholder if no headshot */
+    .headshot-placeholder {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 2px dashed var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .hero-text {}
+    .hero-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+    .hero-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 1.4rem;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent2);
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--text);
+      opacity: 0.78;
+      max-width: 580px;
+      line-height: 1.85;
+      margin-bottom: 2rem;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.6rem;
+      border: 1px solid var(--accent);
+      border-radius: 3px;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: background 0.2s, color 0.2s;
+    }
+    .hero-cta:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+    .hero-cta.secondary {
+      border-color: rgba(201,145,61,0.35);
+      color: var(--muted);
+    }
+    .hero-cta.secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: transparent;
+    }
+
+    /* ── SKILLS STRIP ── */
+    .skills-strip {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.2rem 2.5rem;
+      overflow-x: auto;
+    }
+    .skills-inner {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .skill-tag {
+      background: rgba(201,145,61,0.12);
+      border: 1px solid var(--border);
+      color: var(--accent2);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      padding: 0.3rem 0.8rem;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+
+    /* ── SECTION ── */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 3rem;
+    }
+
+    /* ── PROJECT GRID ── */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+
+    /* image / placeholder */
+    .card-img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+    }
+    .card-img-placeholder {
+      width: 100%;
+      height: 260px;
+      background: #120e0a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+    .card-img-placeholder .filename {
+      font-family: monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      background: rgba(201,145,61,0.1);
+      padding: 0.25rem 0.6rem;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+    }
+    .card-img-placeholder svg {
+      opacity: 0.3;
+      width: 36px;
+      height: 36px;
+    }
+
+    /* gallery strip for multi-image */
+    .card-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      height: 260px;
+      gap: 2px;
+      background: #0e0a07;
+    }
+    .card-gallery-item {
+      overflow: hidden;
+      position: relative;
+    }
+    .card-gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .card-gallery-item .gallery-placeholder {
+      width: 100%;
+      height: 100%;
+      background: #120e0a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      font-size: 0.62rem;
+      color: var(--muted);
+      font-family: monospace;
+      padding: 0.5rem;
+      text-align: center;
+    }
+
+    /* wide 2-col gallery for DOD */
+    .card-gallery-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 260px;
+      gap: 2px;
+      background: #0e0a07;
+    }
+    .card-gallery-2 .card-gallery-item { }
+
+    .card-body {
+      padding: 1.6rem;
+    }
+    .card-org {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+    .card-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.35rem;
+      color: #fff;
+      margin-bottom: 0.8rem;
+    }
+    .card-desc {
+      font-size: 0.92rem;
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+      opacity: 0.82;
+    }
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.2rem;
+    }
+    .tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      opacity: 0.6;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 0.25rem 0.65rem;
+      border-radius: 2px;
+    }
+    .card-link {
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      border-bottom: 1px solid rgba(201,145,61,0.35);
+      padding-bottom: 1px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .card-link:hover {
+      color: var(--accent2);
+      border-color: var(--accent2);
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--text);
+      font-size: 1rem;
+      line-height: 1.9;
+      margin-bottom: 1.4rem;
+      opacity: 0.85;
+    }
+    .about-text p strong {
+      color: var(--text);
+      font-weight: 500;
+      opacity: 1;
+    }
+    .about-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .detail-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .detail-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .detail-value {
+      font-size: 0.92rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      font-size: 0.78rem;
+      color: var(--muted);
+      position: relative;
+      z-index: 1;
+    }
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: var(--accent2); }
+
+    /* ── TYPEWRITER ── */
+    #typewriter {
+      color: var(--accent2);
+      border-right: 2px solid var(--accent);
+      padding-right: 3px;
+      animation: blink 0.75s step-end infinite;
+      white-space: nowrap;
+      font-style: italic;
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { gap: 1.2rem; }
+      .hero { padding: 7rem 1.2rem 3rem; }
+      .hero-inner { flex-direction: column; align-items: flex-start; gap: 2rem; }
+      .hero-title { font-size: 2.2rem; }
+      section { padding: 3.5rem 1.2rem; }
+      .project-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      footer { flex-direction: column; gap: 0.8rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="logo">Alex Tour-Sarkissian</span>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a href="https://www.linkedin.com/in/alex-t-393214155" target="_blank">LinkedIn ↗</a>
+    <a href="Resume - Alex TS.pdf" target="_blank" class="nav-resume">Resume ↓</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+
+    <!-- Headshot: save your photo as headshot.png in this folder -->
+    <div class="headshot-wrap">
+      <img src="Alex Headshot.jpeg" alt="Alex Tour-Sarkissian"
+           onerror="this.parentElement.outerHTML='<div class=\'headshot-placeholder\'>Save photo as<br>headshot.png</div>'" />
+    </div>
+
+    <div class="hero-text">
+      <p class="hero-label">GIS Analyst · San Francisco, CA · Open to Remote</p>
+      <h1 class="hero-title">Turning hard-to-get data<br>into maps that <em id="typewriter">drive decisions.</em></h1>
+      <p class="hero-sub">
+        Some of my most important maps I'm not allowed to show. The data didn't exist —
+        so I georeferenced pipelines by hand, worked around government restrictions,
+        and built products that briefed civil servants and informed defense analysis.
+        Now applying seven years of that rigor to urban systems and transportation infrastructure.
+      </p>
+      <div class="hero-ctas">
+        <a href="#work" class="hero-cta">View My Work ↓</a>
+        <a href="Resume - Alex TS.pdf" target="_blank" class="hero-cta secondary">Download Resume ↓</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SKILLS STRIP -->
+<div class="skills-strip">
+  <div class="skills-inner">
+    <span class="skill-tag">ArcGIS Pro</span>
+    <span class="skill-tag">ArcMap</span>
+    <span class="skill-tag">ArcGIS Online</span>
+    <span class="skill-tag">Experience Builder</span>
+    <span class="skill-tag">ArcGIS Dashboards</span>
+    <span class="skill-tag">ArcGIS Survey123</span>
+    <span class="skill-tag">Python</span>
+    <span class="skill-tag">ArcGIS API for Python</span>
+    <span class="skill-tag">Google Earth Engine</span>
+    <span class="skill-tag">Spatial Analysis</span>
+    <span class="skill-tag">Raster Analysis</span>
+    <span class="skill-tag">Georeferencing</span>
+    <span class="skill-tag">Geodatabases</span>
+    <span class="skill-tag">Remote Sensing</span>
+    <span class="skill-tag">Cartography</span>
+    <span class="skill-tag">GeoAI</span>
+    <span class="skill-tag">Adobe Photoshop</span>
+    <span class="skill-tag">WordPress</span>
+    <span class="skill-tag">Salesforce</span>
+  </div>
+</div>
+
+<!-- WORK -->
+<section id="work">
+  <p class="section-label">Selected Projects</p>
+  <h2 class="section-title">The Work</h2>
+
+  <div class="project-grid">
+
+    <!-- PROJECT 1: Electoral Systems Dashboard -->
+    <div class="project-card">
+      <img class="card-img" src="Electorial Systems.png" alt="Electoral Systems Global Dashboard" />
+      <div class="card-body">
+        <p class="card-org">ProRep Coalition · Nonprofit Volunteer</p>
+        <h3 class="card-title">Electoral Systems Global Dashboard</h3>
+        <p class="card-desc">
+          Designed and built an interactive global map of electoral system families for national legislatures —
+          integrating country-level political data into a comparative spatial visualization for public education.
+          Custom pop-up imagery designed in Photoshop. Live on ArcGIS Online.
+        </p>
+        <div class="card-tags">
+          <span class="tag">ArcGIS Experience Builder</span>
+          <span class="tag">ArcGIS Online</span>
+          <span class="tag">Adobe Photoshop</span>
+          <span class="tag">Web GIS</span>
+          <span class="tag">Political Data</span>
+        </div>
+        <a href="https://lnkd.in/gczHhaBN" target="_blank" class="card-link">View Live Dashboard ↗</a>
+      </div>
+    </div>
+
+    <!-- PROJECT 2: Nepal Dashboard -->
+    <div class="project-card">
+      <img class="card-img" src="Exp Builder.jpeg" alt="School Construction Projects Dashboard" />
+      <div class="card-body">
+        <p class="card-org">Building Education · Web GIS Analyst &amp; Board Member</p>
+        <h3 class="card-title">School Construction Projects Dashboard</h3>
+        <p class="card-desc">
+          Designed and deployed an ArcGIS Experience Builder dashboard visualizing school construction
+          projects across multiple countries — intentionally built to engage both data-driven and
+          emotionally-driven donor audiences. Serves as the centerpiece of the organization's upcoming
+          website overhaul. Also serves on the board of directors, contributing to strategic direction
+          and fundraising.
+        </p>
+        <div class="card-tags">
+          <span class="tag">ArcGIS Experience Builder</span>
+          <span class="tag">Adobe Photoshop</span>
+          <span class="tag">Web GIS</span>
+          <span class="tag">Nonprofit</span>
+        </div>
+        <a href="https://experience.arcgis.com/experience/7bbc6423cfc34f53ad172438d6bed458"
+           target="_blank" class="card-link">View Live Dashboard ↗</a>
+      </div>
+    </div>
+
+    <!-- PROJECT 3: Caucasus Maps -->
+    <div class="project-card">
+      <div class="card-gallery">
+        <div class="card-gallery-item">
+          <img src="Armenia.jpeg" alt="Armenia map" />
+        </div>
+        <div class="card-gallery-item">
+          <img src="Caucauses.jpeg" alt="Caucasus demographics map" />
+        </div>
+        <div class="card-gallery-item">
+          <img src="Southern Russia.jpeg" alt="Southern Russia demographics map" />
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-org">Armenian Virtual College · U.S. Training Initiative</p>
+        <h3 class="card-title">Armenia &amp; Caucasus Thematic Maps</h3>
+        <p class="card-desc">
+          19 thematic maps visualizing ethnic demographics, land use, and population density across
+          six Caucasus nations — for a U.S. training program briefing Armenian civil servants.
+          Data was scarce by design: repressive governments restrict what's available.
+          Georeferencing, source verification, and working around restricted datasets
+          were core to the process. Several maps remain sensitive and are not shown here.
+        </p>
+        <div class="card-tags">
+          <span class="tag">ArcGIS Pro</span>
+          <span class="tag">Python</span>
+          <span class="tag">Thematic Mapping</span>
+          <span class="tag">Government Training</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 5: SF Solar Energy -->
+    <div class="project-card">
+      <img class="card-img" src="SF Solar.jpeg" alt="San Francisco Solar Energy Potential map" />
+      <div class="card-body">
+        <p class="card-org">Environmental Analysis · San Francisco</p>
+        <h3 class="card-title">San Francisco Solar Energy Potential</h3>
+        <p class="card-desc">
+          Visualized Global Horizontal Irradiance (GHI) levels across San Francisco to identify
+          optimal zones for solar panel installations. High-GHI areas — rendered in red and orange —
+          mark locations capable of producing electricity most efficiently year-round,
+          supporting urban energy planning decisions.
+        </p>
+        <div class="card-tags">
+          <span class="tag">ArcGIS Pro</span>
+          <span class="tag">Raster Analysis</span>
+          <span class="tag">Urban Planning</span>
+          <span class="tag">Energy</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 7: Carbon Stock Oregon -->
+    <div class="project-card">
+      <img class="card-img" src="Vegitation of carbon stock.jpeg" alt="Vegetation Carbon Stock Distribution map" />
+      <div class="card-body">
+        <p class="card-org">Environmental Analysis · Southern Oregon</p>
+        <h3 class="card-title">Vegetation Carbon Stock Distribution</h3>
+        <p class="card-desc">
+          Raster analysis mapping the spatial distribution of above-ground vegetation carbon stock (t/ha)
+          across Lane &amp; Douglass Counties in Oregon. A red-to-green gradient reveals high-carbon
+          forest zones, supporting carbon sequestration assessment and climate planning.
+        </p>
+        <div class="card-tags">
+          <span class="tag">ArcGIS Pro</span>
+          <span class="tag">Raster Analysis</span>
+          <span class="tag">Environmental GIS</span>
+          <span class="tag">Climate</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 8: NDWI Rhode Island -->
+    <div class="project-card">
+      <img class="card-img" src="Rhode Island.jpeg" alt="Normalized Difference Water Index of Rhode Island" />
+      <div class="card-body">
+        <p class="card-org">Remote Sensing Analysis · Rhode Island</p>
+        <h3 class="card-title">NDWI — Normalized Difference Water Index</h3>
+        <p class="card-desc">
+          Raster analysis mapping surface water presence and vegetation moisture across Rhode Island
+          using the Normalized Difference Water Index. A five-class gradient from yellow (dry land)
+          to blue (open water) reveals the state's complex coastal inlets, inland ponds, and wetland systems —
+          supporting watershed and land cover analysis.
+        </p>
+        <div class="card-tags">
+          <span class="tag">ArcGIS Pro</span>
+          <span class="tag">Remote Sensing</span>
+          <span class="tag">Raster Analysis</span>
+          <span class="tag">Water Resources</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 10: TVDI Ethiopia -->
+    <div class="project-card">
+      <img class="card-img" src="1761605602078.jpeg" alt="TVDI East and West Harerghe Ethiopia drought map" />
+      <div class="card-body">
+        <p class="card-org">Remote Sensing Analysis · Ethiopia</p>
+        <h3 class="card-title">TVDI — East &amp; West Harerghe Drought Analysis</h3>
+        <p class="card-desc">
+          Temperature Vegetation Dryness Index (TVDI) analysis for East and West Harerghe regions
+          in Ethiopia (March 2015). Derived from remote sensing data, this five-class map
+          — Very Wet to Very Dry — supports drought risk assessment and regional land management planning.
+        </p>
+        <div class="card-tags">
+          <span class="tag">ArcGIS Pro</span>
+          <span class="tag">Remote Sensing</span>
+          <span class="tag">Drought Analysis</span>
+          <span class="tag">Africa</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT: Felidae Conservation Fund -->
+    <div class="project-card">
+      <div class="card-gallery-2">
+        <div class="card-gallery-item">
+          <img src="Felidae (Wildlife) Project-1.png" alt="Bobcat and Puma tracking map - Bay Area" />
+        </div>
+        <div class="card-gallery-item">
+          <img src="Felidae (Wildlife) Project-2.png" alt="Bobcat and Puma tracking map - North Bay detail" />
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-org">Felidae Conservation Fund · GIS Volunteer</p>
+        <h3 class="card-title">Bobcat &amp; Puma Wildlife Tracking — Bay Area</h3>
+        <p class="card-desc">
+          Mapped bobcat and puma movement patterns across ~520 sq mi of Marin County habitat
+          using camera trap and scat observation data collected between 2012 and 2019.
+          Approximately 100 camera trap locations were represented as spatial point features,
+          covering terrain from Muir Woods and Mount Tamalpais to Tennessee Valley and Rodeo Valley.
+          Produced two GIS maps supporting active field research on felid species in the North Bay.
+        </p>
+        <div class="card-tags">
+          <span class="tag">ArcGIS Pro</span>
+          <span class="tag">Wildlife GIS</span>
+          <span class="tag">Spatial Analysis</span>
+          <span class="tag">Conservation</span>
+          <span class="tag">Marin County</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- IN PROGRESS: Climate Change Visualization -->
+    <div class="project-card" style="border-style: dashed; opacity: 0.85;">
+      <div class="card-img-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>
+        </svg>
+        <span style="color: var(--accent); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;">In Development · 2026</span>
+      </div>
+      <div class="card-body">
+        <p class="card-org">Independent Project · In Progress</p>
+        <h3 class="card-title">Climate Change Visualization</h3>
+        <p class="card-desc">
+          Building interactive maps using Google Earth Engine and Python to visualize climate change
+          indicators over time. Version-controlled via GitHub. Exploring how spatial analysis can
+          communicate long-term environmental shifts to non-technical civic and policy audiences.
+        </p>
+        <div class="card-tags">
+          <span class="tag">Google Earth Engine</span>
+          <span class="tag">Python</span>
+          <span class="tag">GitHub</span>
+          <span class="tag">Climate</span>
+          <span class="tag">Web GIS</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">Background</p>
+  <h2 class="section-title">About Alex</h2>
+
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I'm a GIS Analyst based in San Francisco. I've spent seven years working on projects
+        where the data was hard to get, sometimes restricted, sometimes nonexistent —
+        and where the output had to be good enough to brief decision-makers who couldn't
+        afford to be wrong.
+      </p>
+      <p>
+        Some of that work I can show you: school construction dashboards across Nepal,
+        thematic atlases for U.S. civil servant training, wildlife movement maps in Marin County.
+        Some of it I can't — sensitive government work where I georeferenced pipelines by hand
+        because the datasets didn't exist, and where security review was part of the workflow.
+        <strong>I've learned to work with imperfect data and produce outputs people trust.</strong>
+      </p>
+      <p>
+        I love this field — that part is 100% true. Now I'm focused on bringing that rigor to
+        <strong>urban systems, transportation infrastructure, and civic decision-making</strong>,
+        where maps shape how cities move and grow.
+      </p>
+    </div>
+
+    <div class="about-details">
+      <div class="detail-row">
+        <span class="detail-label">Education</span>
+        <span class="detail-value">BA Geography + GIS Certificate<br>Cal State East Bay · 2018</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Certifications</span>
+        <span class="detail-value">
+          LLM Agentic GeoAI Mastery (Udemy · 2026)<br>
+          ArcGIS Online API for Python (Udemy · 2026)
+        </span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Target Roles</span>
+        <span class="detail-value">GIS Analyst · GIS Specialist · GIS Technician</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Focus Areas</span>
+        <span class="detail-value">Transit · Urban Planning · Infrastructure · Environmental GIS</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Location</span>
+        <span class="detail-value">San Francisco, CA · Open to Remote</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Professional Memberships</span>
+        <span class="detail-value">CA Geospatial Professional Network · BayGEO · Kiwanis International</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="text-align: center; padding-top: 4rem; padding-bottom: 4rem;">
+  <p class="section-label">Get In Touch</p>
+  <h2 class="section-title" style="margin-bottom: 1rem;">Let's Talk</h2>
+  <p style="color: var(--muted); font-size: 0.95rem; max-width: 480px; margin: 0 auto 2rem; line-height: 1.8;">
+    Open to GIS Analyst and Specialist roles in transit, urban planning, and infrastructure —
+    remote or Bay Area. Reach out directly.
+  </p>
+  <a href="mailto:toursarkissianalex@gmail.com" class="hero-cta" style="margin: 0 auto;">
+    toursarkissianalex@gmail.com
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Alex Tour-Sarkissian</span>
+  <span>
+    <a href="https://www.linkedin.com/in/alex-t-393214155" target="_blank">LinkedIn ↗</a>
+    &nbsp;·&nbsp;
+    <a href="mailto:toursarkissianalex@gmail.com">toursarkissianalex@gmail.com</a>
+    &nbsp;·&nbsp;
+    <a href="Resume - Alex TS.pdf" target="_blank">Resume ↓</a>
+  </span>
+</footer>
+
+
+<script>
+  const phrases = [
+    "drive decisions.",
+    "move cities.",
+    "inform policy.",
+    "guide infrastructure.",
+    "clarify complexity."
+  ];
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let deleting = false;
+  const el = document.getElementById("typewriter");
+
+  function type() {
+    const current = phrases[phraseIndex];
+    if (!deleting) {
+      el.textContent = current.slice(0, charIndex + 1);
+      charIndex++;
+      if (charIndex === current.length) {
+        deleting = true;
+        setTimeout(type, 1800);
+        return;
+      }
+    } else {
+      el.textContent = current.slice(0, charIndex - 1);
+      charIndex--;
+      if (charIndex === 0) {
+        deleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        setTimeout(type, 300);
+        return;
+      }
+    }
+    setTimeout(type, deleting ? 45 : 70);
+  }
+
+  // Start after a short delay so page feels settled
+  setTimeout(type, 1200);
+</script>
+</body>
+</html>
