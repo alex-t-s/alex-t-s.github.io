@@ -475,6 +475,60 @@
       50% { border-color: transparent; }
     }
 
+    /* ── FILTER TABS ── */
+    .filter-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .filter-btn {
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      background: transparent;
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .filter-btn:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    .filter-btn.active {
+      background: rgba(201,145,61,0.12);
+      border-color: var(--accent);
+      color: var(--accent2);
+    }
+    .project-card.hidden { display: none; }
+
+    /* ── SKILL STRIP CATEGORIES ── */
+    .skill-category {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      align-self: center;
+      white-space: nowrap;
+    }
+    .skill-divider {
+      width: 1px;
+      height: 1.2rem;
+      background: var(--border);
+      align-self: center;
+      flex-shrink: 0;
+    }
+
+    /* ── MAP IMAGE HEIGHT ── */
+    .card-img,
+    .card-img-placeholder,
+    .card-gallery,
+    .card-gallery-2 { height: 285px; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: 1rem 1.2rem; }
@@ -534,22 +588,29 @@
 <!-- SKILLS STRIP -->
 <div class="skills-strip">
   <div class="skills-inner">
+    <span class="skill-category">Esri Platform</span>
     <span class="skill-tag">ArcGIS Pro</span>
     <span class="skill-tag">ArcMap</span>
     <span class="skill-tag">ArcGIS Online</span>
     <span class="skill-tag">Experience Builder</span>
     <span class="skill-tag">ArcGIS Dashboards</span>
     <span class="skill-tag">ArcGIS Survey123</span>
+    <span class="skill-divider"></span>
+    <span class="skill-category">Programming</span>
     <span class="skill-tag">Python</span>
     <span class="skill-tag">ArcGIS API for Python</span>
     <span class="skill-tag">Google Earth Engine</span>
+    <span class="skill-divider"></span>
+    <span class="skill-category">Spatial Methods</span>
     <span class="skill-tag">Spatial Analysis</span>
     <span class="skill-tag">Raster Analysis</span>
     <span class="skill-tag">Georeferencing</span>
-    <span class="skill-tag">Geodatabases</span>
     <span class="skill-tag">Remote Sensing</span>
     <span class="skill-tag">Cartography</span>
     <span class="skill-tag">GeoAI</span>
+    <span class="skill-tag">Geodatabases</span>
+    <span class="skill-divider"></span>
+    <span class="skill-category">Tools</span>
     <span class="skill-tag">Adobe Photoshop</span>
     <span class="skill-tag">WordPress</span>
     <span class="skill-tag">Salesforce</span>
@@ -561,18 +622,27 @@
   <p class="section-label">Selected Projects</p>
   <h2 class="section-title">The Work</h2>
 
+  <div class="filter-tabs">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="civic">Civic &amp; Nonprofit</button>
+    <button class="filter-btn" data-filter="environmental">Environmental</button>
+    <button class="filter-btn" data-filter="conservation">Conservation</button>
+    <button class="filter-btn" data-filter="geoai">GeoAI</button>
+  </div>
+
   <div class="project-grid">
 
     <!-- PROJECT 1: Electoral Systems Dashboard -->
-    <div class="project-card">
+    <div class="project-card" data-category="civic">
       <img class="card-img" src="Electorial Systems.png" alt="Electoral Systems Global Dashboard" />
       <div class="card-body">
         <p class="card-org">ProRep Coalition · Nonprofit Volunteer</p>
         <h3 class="card-title">Electoral Systems Global Dashboard</h3>
         <p class="card-desc">
-          Designed and built an interactive global map of electoral system families for national legislatures —
-          integrating country-level political data into a comparative spatial visualization for public education.
-          Custom pop-up imagery designed in Photoshop. Live on ArcGIS Online.
+          Designed and built an interactive global map of electoral system families for national legislatures.
+          Research-driven process: cross-referenced five to six sources to verify accuracy country by country,
+          structured the data in Excel, and integrated it into ArcGIS Pro before publishing to ArcGIS Online.
+          Custom pop-up imagery designed in Photoshop. Publicly accessible and live.
         </p>
         <div class="card-tags">
           <span class="tag">ArcGIS Experience Builder</span>
@@ -586,17 +656,18 @@
     </div>
 
     <!-- PROJECT 2: Nepal Dashboard -->
-    <div class="project-card">
+    <div class="project-card" data-category="civic">
       <img class="card-img" src="Exp Builder.jpeg" alt="School Construction Projects Dashboard" />
       <div class="card-body">
         <p class="card-org">Building Education · Web GIS Analyst &amp; Board Member</p>
         <h3 class="card-title">School Construction Projects Dashboard</h3>
         <p class="card-desc">
-          Designed and deployed an ArcGIS Experience Builder dashboard visualizing school construction
-          projects across multiple countries — intentionally built to engage both data-driven and
-          emotionally-driven donor audiences. Serves as the centerpiece of the organization's upcoming
-          website overhaul. Also serves on the board of directors, contributing to strategic direction
-          and fundraising.
+          Designed and deployed an ArcGIS Experience Builder dashboard visualizing 7 school construction
+          sites across Nepal — 5 completed, 1 under construction, 1 planned — intentionally built to
+          engage both data-driven and emotionally-driven donor audiences. Serves as the centerpiece of
+          the organization's upcoming website overhaul. Also serves on the board of directors,
+          contributing to strategic direction and fundraising. Provided WordPress and technical support
+          for 6–10 staff members.
         </p>
         <div class="card-tags">
           <span class="tag">ArcGIS Experience Builder</span>
@@ -610,7 +681,7 @@
     </div>
 
     <!-- PROJECT 3: Caucasus Maps -->
-    <div class="project-card">
+    <div class="project-card" data-category="civic">
       <div class="card-gallery">
         <div class="card-gallery-item">
           <img src="Armenia.jpeg" alt="Armenia map" />
@@ -626,11 +697,13 @@
         <p class="card-org">Armenian Virtual College · U.S. Training Initiative</p>
         <h3 class="card-title">Armenia &amp; Caucasus Thematic Maps</h3>
         <p class="card-desc">
-          19 thematic maps visualizing ethnic demographics, land use, and population density across
-          six Caucasus nations — for a U.S. training program briefing Armenian civil servants.
+          20 thematic maps visualizing ethnic demographics, land use, population density, and
+          infrastructure across 6 Caucasus nations — produced for a U.S. training program that
+          reached 100+ participants across government, academia, and think tanks. Integrated
+          ~30 geospatial data sources from Turkey, Armenia, Russia, Azerbaijan, Iran, and Georgia.
           Data was scarce by design: repressive governments restrict what's available.
-          Georeferencing, source verification, and working around restricted datasets
-          were core to the process. Several maps remain sensitive and are not shown here.
+          Automated georeferencing workflows with Python, saving approximately 20 hours of manual
+          processing. Several maps remain sensitive and are not shown here.
         </p>
         <div class="card-tags">
           <span class="tag">ArcGIS Pro</span>
@@ -642,7 +715,7 @@
     </div>
 
     <!-- PROJECT 5: SF Solar Energy -->
-    <div class="project-card">
+    <div class="project-card" data-category="environmental">
       <img class="card-img" src="SF Solar.jpeg" alt="San Francisco Solar Energy Potential map" />
       <div class="card-body">
         <p class="card-org">Environmental Analysis · San Francisco</p>
@@ -663,7 +736,7 @@
     </div>
 
     <!-- PROJECT 7: Carbon Stock Oregon -->
-    <div class="project-card">
+    <div class="project-card" data-category="environmental">
       <img class="card-img" src="Vegitation of carbon stock.jpeg" alt="Vegetation Carbon Stock Distribution map" />
       <div class="card-body">
         <p class="card-org">Environmental Analysis · Southern Oregon</p>
@@ -683,7 +756,7 @@
     </div>
 
     <!-- PROJECT 8: NDWI Rhode Island -->
-    <div class="project-card">
+    <div class="project-card" data-category="environmental">
       <img class="card-img" src="Rhode Island.jpeg" alt="Normalized Difference Water Index of Rhode Island" />
       <div class="card-body">
         <p class="card-org">Remote Sensing Analysis · Rhode Island</p>
@@ -704,7 +777,7 @@
     </div>
 
     <!-- PROJECT 10: TVDI Ethiopia -->
-    <div class="project-card">
+    <div class="project-card" data-category="environmental">
       <img class="card-img" src="1761605602078.jpeg" alt="TVDI East and West Harerghe Ethiopia drought map" />
       <div class="card-body">
         <p class="card-org">Remote Sensing Analysis · Ethiopia</p>
@@ -724,7 +797,7 @@
     </div>
 
     <!-- PROJECT: Felidae Conservation Fund -->
-    <div class="project-card">
+    <div class="project-card" data-category="conservation">
       <div class="card-gallery-2">
         <div class="card-gallery-item">
           <img src="Felidae (Wildlife) Project-1.png" alt="Bobcat and Puma tracking map - Bay Area" />
@@ -754,7 +827,7 @@
     </div>
 
     <!-- IN PROGRESS: Climate Change Visualization -->
-    <div class="project-card" style="border-style: dashed; opacity: 0.85;">
+    <div class="project-card" data-category="geoai" style="border-style: dashed; opacity: 0.85;">
       <div class="card-img-placeholder">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>
@@ -765,9 +838,11 @@
         <p class="card-org">Independent Project · In Progress</p>
         <h3 class="card-title">Climate Change Visualization</h3>
         <p class="card-desc">
-          Building interactive maps using Google Earth Engine and Python to visualize climate change
-          indicators over time. Version-controlled via GitHub. Exploring how spatial analysis can
-          communicate long-term environmental shifts to non-technical civic and policy audiences.
+          Building interactive maps using Google Earth Engine and Python to identify and visualize
+          regions most affected by climate change across the United States — with initial focus on
+          Louisiana, Florida, and Colorado. Using Earth Engine datasets and spatial analysis to
+          generate vulnerability maps for civic and policy audiences. Near completion.
+          Version-controlled via GitHub.
         </p>
         <div class="card-tags">
           <span class="tag">Google Earth Engine</span>
@@ -790,22 +865,29 @@
   <div class="about-grid">
     <div class="about-text">
       <p>
-        I'm a GIS Analyst based in San Francisco. I've spent seven years working on projects
-        where the data was hard to get, sometimes restricted, sometimes nonexistent —
-        and where the output had to be good enough to brief decision-makers who couldn't
-        afford to be wrong.
+        I'm a GIS Analyst based in San Francisco. My interest in GIS started long before I knew
+        what GIS was — as a kid I spent hours with atlases, studying how roads connected places,
+        how boundaries were drawn, how geography shaped movement. That fascination, combined with
+        an early love of computers, led me straight to GIS in college. My first course, using ArcMap,
+        confirmed it: this was the field for me.
       </p>
       <p>
-        Some of that work I can show you: school construction dashboards across Nepal,
-        thematic atlases for U.S. civil servant training, wildlife movement maps in Marin County.
-        Some of it I can't — sensitive government work where I georeferenced pipelines by hand
-        because the datasets didn't exist, and where security review was part of the workflow.
+        I've spent the past several years working on projects where the data was hard to get —
+        sometimes restricted, sometimes nonexistent — and where the output had to be good enough
+        to brief decision-makers who couldn't afford to be wrong. Some of that work I can show you:
+        7 school construction sites across Nepal, 20 thematic maps for a U.S. civil servant training
+        program reaching 100+ participants, wildlife tracking maps across 520 sq mi of Marin County.
+        Some of it I can't — including analytical maps produced for the Department of Defense covering
+        Afghan mineral resources, infrastructure corridors, and Belt and Road Initiative analysis.
         <strong>I've learned to work with imperfect data and produce outputs people trust.</strong>
       </p>
       <p>
-        I love this field — that part is 100% true. Now I'm focused on bringing that rigor to
-        <strong>urban systems, transportation infrastructure, and civic decision-making</strong>,
-        where maps shape how cities move and grow.
+        Since September 2024, I've invested heavily in structured skill-building — working with a GIS
+        mentor to deepen my capabilities in raster analysis, remote sensing, ArcGIS Pro editing, and
+        Google Earth Engine. I attended the CalGIS conference in Redlands and have been expanding my
+        professional network through CalGPN and BayGeo. I don't own a car — I rely on transit and
+        cycling every day — and that makes me genuinely curious about how transportation networks are
+        designed, how geography shapes them, and <strong>how maps can help cities move better.</strong>
       </p>
     </div>
 
@@ -856,7 +938,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <span>© 2026 Alex Tour-Sarkissian</span>
+  <span>© 2026 Alex Tour-Sarkissian &nbsp;·&nbsp; <span style="font-family: monospace; font-size: 0.72rem; color: var(--accent); opacity: 0.6;">37.7749° N, 122.4194° W</span></span>
   <span>
     <a href="https://www.linkedin.com/in/alex-t-393214155" target="_blank">LinkedIn ↗</a>
     &nbsp;·&nbsp;
@@ -905,6 +987,27 @@
 
   // Start after a short delay so page feels settled
   setTimeout(type, 1200);
+</script>
+
+<script>
+  // Category filter tabs
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.project-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      cards.forEach(card => {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
 </script>
 </body>
 </html>
